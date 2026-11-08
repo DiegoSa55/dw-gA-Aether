@@ -1,0 +1,22 @@
+:root {
+    --color-fondo: #0f172a;
+    --color-superficie: #1e293b;
+    --color-superficie-hover: #334155;
+    --color-borde: #475569;
+
+    --color-primario: #06b6d4;
+    --color-primario-hover: #0891b2;
+    --color-acento: #6366f1;
+
+    --color-texto: #f8fafc;
+    --color-texto-mutado: #94a3b8;
+    --color-error: #ef4444;
+    --color-exito: #10b981;
+
+    --fuente-principal: 'Inter', system-ui, apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    --sombra-tarjeta: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+    --sombra-elevada: 0 10px 15 px -3px rgba(0, 0, 0, 0.5);
+    --radio-borde: 8px;
+    
+}

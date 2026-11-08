@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AETHER Studio | Carrito de Compras</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- Cabecera Semántica Principal (R1 / R2) -->
+  <header class="header-principal">
+    <div class="contenedor-nav">
+      <a href="index.html" class="logo">AETHER <span>STUDIO</span></a>
+      <nav>
+        <ul class="menu-navegacion">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="carrito.html" class="activo">Carrito <span id="contador" class="badge-carrito">0</span></a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido Principal Semántico (R2) -->
+  <main class="contenedor-principal">
+    <h2>Tu Carrito de Compras</h2>
+    <p style="color: var(--color-texto-mutado); margin-bottom: 2rem;">Revisa y gestiona los artículos de tu pedido.</p>
+
+    <!-- Layout Adaptativo (R2 / R6) -->
+    <div class="layout-carrito">
+      
+      <!-- Columna 1: Tabla de Productos -->
+      <section class="columna-tabla">
+        
+        <!-- Estado Vacío (se activa dinámicamente con JS) -->
+        <div id="contenedor-carrito-vacio" style="display: none; padding: 2.5rem; background: var(--color-superficie); border: 1px solid var(--color-borde); border-radius: var(--radio-borde); text-align: center;">
+          <p style="color: var(--color-texto-mutado); font-size: 1.1rem; margin-bottom: 1rem;">Tu carrito está vacío actualmente.</p>
+          <a href="catalogo.html" class="btn btn-primario" style="display: inline-block; text-decoration: none;">Explorar Catálogo</a>
+        </div>
+
+        <!-- Tabla del Carrito -->
+        <table id="tabla-carrito" style="width: 100%; border-collapse: collapse; background: var(--color-superficie); border: 1px solid var(--color-borde); border-radius: var(--radio-borde); overflow: hidden;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--color-borde); text-align: left; background-color: rgba(255,255,255,0.02);">
+              <th style="padding: 1rem;">Producto</th>
+              <th style="padding: 1rem;">Precio</th>
+              <th style="padding: 1rem;">Cantidad</th>
+              <th style="padding: 1rem;">Subtotal</th>
+              <th style="padding: 1rem; text-align: center;">Acción</th>
+            </tr>
+          </thead>
+          <tbody id="items-carrito">
+            <!-- Filas generadas dinámicamente desde js/app.js -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Columna 2: Resumen del Pedido y Cálculos (R6) -->
+      <section class="columna-resumen">
+        <div style="background-color: var(--color-superficie); border: 1px solid var(--color-borde); padding: 1.5rem; border-radius: var(--radio-borde); box-shadow: var(--sombra-tarjeta);">
+          <h3 style="margin-bottom: 1rem; border-bottom: 1px solid var(--color-borde); padding-bottom: 0.5rem;">Resumen del Pedido</h3>
+          
+          <!-- Cupón de Descuento (R6) -->
+          <div style="margin-bottom: 1.5rem;">
+            <label for="input-cupon" style="font-size: 0.85rem; color: var(--color-texto-mutado); font-weight: 600;">¿Tienes un cupón?</label>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.4rem;">
+              <input type="text" id="input-cupon" class="campo-input" placeholder="Ej. AETHER10" style="padding: 0.5rem; font-size: 0.9rem; flex: 1; min-width: 0;">
+              <button type="button" id="btn-aplicar-cupon" class="btn btn-secundario" style="white-space: nowrap;">Aplicar</button>
+            </div>
+            <small id="mensaje-cupon" style="display: block; margin-top: 0.4rem; font-size: 0.8rem; font-weight: 500;"></small>
+          </div>
+
+          <!-- Importes Desglosados (R6) -->
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+            <span style="color: var(--color-texto-mutado);">Subtotal:</span>
+            <span id="monto-subtotal" style="font-weight: 600;">S/ 0.00</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem; color: var(--color-exito);">
+            <span>Descuento:</span>
+            <span id="monto-descuento" style="font-weight: 600;">- S/ 0.00</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+            <span style="color: var(--color-texto-mutado);">Envío:</span>
+            <span id="monto-envio" style="font-weight: 600;">S/ 0.00</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: var(--color-texto-mutado); font-size: 0.85rem;">
+            <span>IGV (18% incl.):</span>
+            <span id="monto-igv">S/ 0.00</span>
+          </div>
+
+          <hr style="border: none; border-top: 1px solid var(--color-borde); margin-bottom: 1rem;">
+
+          <div style="display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem;">
+            <span>Total:</span>
+            <span id="monto-total" style="color: var(--color-primario);">S/ 0.00</span>
+          </div>
+
+          <button type="button" class="btn btn-primario" style="width: 100%; font-size: 1rem; padding: 0.8rem;" onclick="alert('¡Demostración de pedido completada correctamente!');">Finalizar Compra</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Pie de Página Semántico (R2) -->
+  <footer class="footer-principal">
+    <p>&copy; 2026 AETHER Studio. Proyecto académico - Universidad Continental.</p>
+  </footer>
+
+  <!-- Carga de Scripts en Orden Estricto (R4 / R6 / R8) -->
+  <script src="js/datos.js"></script>
+  <script src="js/carrito.js"></script>
+  <script src="js/calculos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
