@@ -3,34 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AETHER Studio | Catálogo de Periféricos</title>
+  <title>Catálogo | AETHER Studio</title>
+  <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
 
-  <header class="header-principal">
-    <div class="contenedor-nav">
-      <a href="index.html" class="logo">AETHER <span>STUDIO</span></a>
-      <nav>
-        <ul class="menu-navegacion">
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="catalogo.html" class="activo">Catálogo</a></li>
-          <li><a href="carrito.html">Carrito <span id="contador" class="badge-carrito">0</span></a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-      </nav>
-    </div>
+  <header class="sticky-top border-bottom border-secondary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+      <div class="container">
+        <a class="navbar-brand fw-bold text-info" href="index.html">
+          <i class="bi bi-cpu-fill me-2"></i>AETHER Studio
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir navegación">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menuPrincipal">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+            <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link active" href="catalogo.html">Catálogo</a></li>
+            <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+            <li class="nav-item">
+              <a class="btn btn-outline-info position-relative" href="carrito.html">
+                <i class="bi bi-cart3 me-1"></i>Carrito
+                <span id="contador" class="badge bg-info text-dark ms-1">0</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </header>
 
-  <main class="contenedor-principal">
-    <section class="seccion-catalogo">
-      <h2>Catálogo de Equipamiento</h2>
-      <p style="color: var(--color-texto-mutado); margin-bottom: 1.5rem;">Explora nuestra selección de periféricos de alta precisión.</p>
-
-      <div class="controles-busqueda">
-        <input type="text" id="buscador" class="campo-input" placeholder="Buscar por nombre..." aria-label="Buscar productos">
-        <select id="filtro-categoria" class="campo-select" aria-label="Filtrar por categoría">
+  <main class="container py-5">
+    <div class="row align-items-center mb-4 g-3">
+      <div class="col-12 col-md-5">
+        <h1 class="h2 fw-bold text-white mb-0">
+          <i class="bi bi-grid-3x3-gap-fill text-info me-2"></i>Catálogo de Productos
+        </h1>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="input-group">
+          <span class="input-group-text bg-dark text-info border-secondary"><i class="bi bi-search"></i></span>
+          <input type="text" id="buscador" class="form-control bg-dark text-white border-secondary" placeholder="Buscar periférico...">
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <select id="filtro-categoria" class="form-select bg-dark text-white border-secondary">
           <option value="todas">Todas las categorías</option>
           <option value="teclados">Teclados</option>
           <option value="ratones">Ratones</option>
@@ -38,23 +62,30 @@
           <option value="accesorios">Accesorios</option>
         </select>
       </div>
+    </div>
 
-      <div id="catalogo" class="grilla-productos"></div>
-    </section>
+    <section id="catalogo" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" aria-live="polite"></section>
   </main>
 
-  <div id="modal-detalle" class="modal-overlay" aria-hidden="true">
-    <div class="modal-contenido">
-      <button type="button" class="btn-cerrar-modal" id="btn-cerrar-modal">&times;</button>
+  <!-- Modal de detalle conectado con app.js -->
+  <div id="modal-detalle" class="modal-personalizado" aria-hidden="true">
+    <div class="modal-caja card bg-dark border-secondary text-white p-4">
+      <div class="d-flex justify-content-end">
+        <button type="button" id="btn-cerrar-modal" class="btn-close btn-close-white" aria-label="Cerrar"></button>
+      </div>
       <div id="contenido-modal"></div>
     </div>
   </div>
 
-  <footer class="footer-principal">
-    <p>&copy; 2026 AETHER Studio. Proyecto académico - Universidad Continental.</p>
+  <footer class="bg-dark border-top border-secondary py-4 mt-5">
+    <div class="container text-center text-secondary">
+      <p class="mb-0">&copy; 2026 AETHER Studio — Precisión en el hardware, precisión en el código.</p>
+    </div>
   </footer>
 
+  <script src="bootstrap/bootstrap.bundle.min.js"></script>
   <script src="js/datos.js"></script>
+  <script src="js/calculos.js"></script>
   <script src="js/carrito.js"></script>
   <script src="js/app.js"></script>
 </body>

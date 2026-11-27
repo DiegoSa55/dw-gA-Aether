@@ -3,76 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AETHER Studio | Contacto</title>
+  <title>Contacto | AETHER Studio</title>
+  <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
 
-  <!-- Cabecera Semántica -->
-  <header class="header-principal">
-    <div class="contenedor-nav">
-      <a href="index.html" class="logo">AETHER <span>STUDIO</span></a>
-      <nav>
-        <ul class="menu-navegacion">
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="catalogo.html">Catálogo</a></li>
-          <li><a href="carrito.html">Carrito <span id="contador" class="badge-carrito">0</span></a></li>
-          <li><a href="contacto.html" class="activo">Contacto</a></li>
-        </ul>
-      </nav>
-    </div>
+  <header class="sticky-top border-bottom border-secondary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+      <div class="container">
+        <a class="navbar-brand fw-bold text-info" href="index.html">
+          <i class="bi bi-cpu-fill me-2"></i>AETHER Studio
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir navegación">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menuPrincipal">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+            <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="catalogo.html">Catálogo</a></li>
+            <li class="nav-item"><a class="nav-link active" href="contacto.html">Contacto</a></li>
+            <li class="nav-item">
+              <a class="btn btn-outline-info position-relative" href="carrito.html">
+                <i class="bi bi-cart3 me-1"></i>Carrito
+                <span id="contador" class="badge bg-info text-dark ms-1">0</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </header>
 
-  <!-- Contenido Principal -->
-  <main class="contenedor-principal">
-    <section>
-      <h2 style="text-align: center; margin-bottom: 0.5rem;">Atención al Cliente</h2>
-      <p style="text-align: center; color: var(--color-texto-mutado); margin-bottom: 2rem;">¿Tienes alguna consulta técnica o pedido especial? Escríbenos.</p>
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="card bg-dark border-secondary text-white p-4 p-md-5">
+          <h1 class="h3 fw-bold mb-2">
+            <i class="bi bi-envelope-paper-fill text-info me-2"></i>Contáctanos
+          </h1>
+          <p class="text-secondary mb-4">¿Tienes dudas sobre compatibilidad o pedidos corporativos? Escríbenos.</p>
 
-      <!-- Formulario con atributo novalidate (Requisito estricto R9) -->
-      <form id="form-contacto" class="form-contacto" novalidate>
-        <!-- Campo 1: Nombre -->
-        <div class="grupo-campo">
-          <label for="nombre">Nombre completo</label>
-          <input type="text" id="nombre" name="nombre" class="campo-input" placeholder="Ej. Carlos Mendoza">
-          <small id="error-nombre" class="mensaje-error"></small>
+          <form id="form-contacto" novalidate>
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre Completo</label>
+              <input type="text" id="nombre" class="form-control bg-dark text-white border-secondary" placeholder="Ej. Diego Salazar" required>
+              <div class="invalid-feedback">Ingresa al menos 3 caracteres.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="correo" class="form-label">Correo Electrónico</label>
+              <input type="email" id="correo" class="form-control bg-dark text-white border-secondary" placeholder="nombre@ejemplo.com" required>
+              <div class="invalid-feedback">Ingresa un correo válido.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="celular" class="form-label">Celular</label>
+              <input type="tel" id="celular" class="form-control bg-dark text-white border-secondary" placeholder="987654321" required>
+              <div class="invalid-feedback">Debe tener 9 dígitos y empezar con 9.</div>
+            </div>
+
+            <div class="mb-4">
+              <label for="mensaje" class="form-label">Mensaje</label>
+              <textarea id="mensaje" rows="4" class="form-control bg-dark text-white border-secondary" placeholder="Escribe tu consulta aquí..." required></textarea>
+              <div class="invalid-feedback">Escribe al menos 10 caracteres.</div>
+            </div>
+
+            <button type="submit" class="btn btn-info w-100 fw-semibold py-2">
+              <i class="bi bi-send-fill me-2"></i>Enviar Mensaje
+            </button>
+          </form>
         </div>
-
-        <!-- Campo 2: Correo -->
-        <div class="grupo-campo">
-          <label for="correo">Correo electrónico</label>
-          <input type="email" id="correo" name="correo" class="campo-input" placeholder="ejemplo@correo.com">
-          <small id="error-correo" class="mensaje-error"></small>
-        </div>
-
-        <!-- Campo 3: Celular -->
-        <div class="grupo-campo">
-          <label for="celular">Celular de contacto</label>
-          <input type="tel" id="celular" name="celular" class="campo-input" placeholder="Ej. 912345678">
-          <small id="error-celular" class="mensaje-error"></small>
-        </div>
-
-        <!-- Campo 4: Mensaje -->
-        <div class="grupo-campo">
-          <label for="mensaje">Mensaje o Consulta</label>
-          <textarea id="mensaje" name="mensaje" class="campo-input" rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
-          <small id="error-mensaje" class="mensaje-error"></small>
-        </div>
-
-        <button type="submit" class="btn btn-primario" style="width: 100%; font-size: 1rem; margin-top: 0.5rem;">Enviar Mensaje</button>
-        <p id="mensaje-exito" style="color: var(--color-exito); text-align: center; margin-top: 1rem; display: none; font-weight: bold;"></p>
-      </form>
-    </section>
+      </div>
+    </div>
   </main>
 
-  <!-- Pie de Página Semántico -->
-  <footer class="footer-principal">
-    <p>&copy; 2026 AETHER Studio. Proyecto académico - Universidad Continental.</p>
+  <footer class="bg-dark border-top border-secondary py-4 mt-5">
+    <div class="container text-center text-secondary">
+      <p class="mb-0">&copy; 2026 AETHER Studio — Precisión en el hardware, precisión en el código.</p>
+    </div>
   </footer>
 
-  <!-- Carga de Scripts en Orden Estricto -->
+  <script src="bootstrap/bootstrap.bundle.min.js"></script>
   <script src="js/datos.js"></script>
+  <script src="js/calculos.js"></script>
   <script src="js/carrito.js"></script>
   <script src="js/app.js"></script>
   <script src="js/formulario.js"></script>

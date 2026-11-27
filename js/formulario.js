@@ -1,79 +1,42 @@
-// js/formulario.js - Validación exclusiva mediante JavaScript (R9)
-
 const $formContacto = document.querySelector('#form-contacto');
-const $mensajeExito = document.querySelector('#mensaje-exito');
 
-// Función pura de validación que retorne un objeto con los errores encontrados
-function validarFormulario(datos) {
-  const errores = {};
-
-  // 1. Validar Nombre (mínimo 3 letras)
-  if (!datos.nombre || datos.nombre.trim().length < 3) {
-    errores.nombre = 'Escribe al menos 3 letras.';
-  }
-
-  // 2. Validar Correo (formato mediante Expresión Regular)
-  const regexCorreo = /^\S+@\S+\.\S+$/;
-  if (!datos.correo || !regexCorreo.test(datos.correo.trim())) {
-    errores.correo = 'El correo no tiene un formato válido.';
-  }
-
-  // 3. Validar Celular (9 dígitos y debe empezar obligatoriamente con 9)
-  const regexCelular = /^9\d{8}$/;
-  if (!datos.celular || !regexCelular.test(datos.celular.trim())) {
-    errores.celular = 'Debe tener 9 dígitos y empezar con 9.';
-  }
-
-  // 4. Validar Mensaje (mínimo 10 caracteres)
-  if (!datos.mensaje || datos.mensaje.trim().length < 10) {
-    errores.mensaje = 'Escribe una consulta de al menos 10 caracteres.';
-  }
-
-  return errores;
-}
-
-// Escuchar evento submit en el formulario
 if ($formContacto) {
+  const $nombre = document.querySelector('#nombre');
+  const $correo = document.querySelector('#correo');
+  const $celular = document.querySelector('#celular');
+  const $mensaje = document.querySelector('#mensaje');
+
+  function validarCampo(input, condicion, textoError) {
+    const feedback = input.nextElementSibling;
+    if (condicion) {
+      input.classList.remove('is-invalid');
+      input.classList.add('is-valid');
+      input.setAttribute('aria-invalid', 'false');
+      return true;
+    } else {
+      input.classList.remove('is-valid');
+      input.classList.add('is-invalid');
+      input.setAttribute('aria-invalid', 'true');
+      if (feedback) feedback.textContent = textoError;
+      return false;
+    }
+  }
+
   $formContacto.addEventListener('submit', e => {
-    e.preventDefault(); // Detener el envío tradicional del navegador
+    e.preventDefault();
 
-    // Capturar todos los pares clave/valor del formulario
-    const datos = Object.fromEntries(new FormData($formContacto));
-    const errores = validarFormulario(datos);
+    const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regexCelular = /^9\d{8}$/;
 
-    const campos = ['nombre', 'correo', 'celular', 'mensaje'];
-    let hayErrores = false;
+    const okNombre = validarCampo($nombre, $nombre.value.trim().length >= 3, 'Ingresa al menos 3 caracteres.');
+    const okCorreo = validarCampo($correo, regexCorreo.test($correo.value.trim()), 'Ingresa un correo válido.');
+    const okCelular = validarCampo($celular, regexCelular.test($celular.value.trim()), 'Debe tener 9 dígitos y empezar con 9.');
+    const okMensaje = validarCampo($mensaje, $mensaje.value.trim().length >= 10, 'Escribe al menos 10 caracteres.');
 
-    // Iterar sobre cada campo para mostrar mensaje de error y actualizar aria-invalid
-    campos.forEach(campo => {
-      const $error = document.querySelector(`#error-${campo}`);
-      const $input = $formContacto.elements[campo];
-
-      if (errores[campo]) {
-        hayErrores = true;
-        if ($error) $error.textContent = errores[campo];
-        if ($input) $input.setAttribute('aria-invalid', 'true');
-      } else {
-        if ($error) $error.textContent = '';
-        if ($input) $input.setAttribute('aria-invalid', 'false');
-      }
-    });
-
-    // Si todos los campos son válidos, resetear formulario y notificar al usuario
-    if (!hayErrores) {
+    if (okNombre && okCorreo && okCelular && okMensaje) {
+      mostrarAviso('Consulta enviada correctamente');
       $formContacto.reset();
-      campos.forEach(campo => {
-        const $input = $formContacto.elements[campo];
-        if ($input) $input.removeAttribute('aria-invalid');
-      });
-
-      if ($mensajeExito) {
-        $mensajeExito.textContent = '¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.';
-        $mensajeExito.style.display = 'block';
-        setTimeout(() => {
-          $mensajeExito.style.display = 'none';
-        }, 4000);
-      }
+      [$nombre, $correo, $celular, $mensaje].forEach(campo => campo.classList.remove('is-valid'));
     }
   });
 }

@@ -1,4 +1,4 @@
-// js/datos.js - Catálogo de AETHER Studio con enlaces de imágenes corregidos (R3)
+// js/datos.js - Catálogo de AETHER Studio
 
 const productos = [
   {
